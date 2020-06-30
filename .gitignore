@@ -1,20 +1,18 @@
-node_modules/**/*
-npm-debug.*
-web-build/
+*/node_modules/**/*
+*/npm-debug.*
+*/web-build/
 */.expo/*
-.DS_Store
+*/.DS_Store
 
 rn-component-style-prop/node_modules/**/*
 rn-component-style-prop/npm-debug.*
 rn-component-style-prop/web-build/
 
-
-rn-states/node_modules/**/*
-rn-states/npm-debug.*
-rn-states/web-build/
-rn-states/.DS_Store
-
-
+node_modules/**/*
+npm-debug.*
+web-build/
+.expo/*
+.DS_Store
 *.jks
 *.p8
 *.p12
@@ -24,5 +22,5 @@ rn-states/.DS_Store
 
 
 # macOS
-
+.DS_Store
 
