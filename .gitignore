@@ -1,0 +1,20 @@
+node_modules/**/*
+npm-debug.*
+web-build/
+
+rn-component-style-prop/node_modules/**/*
+rn-component-style-prop/npm-debug.*
+rn-component-style-prop/web-build/
+
+.expo/*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+
+
+# macOS
+.DS_Store
+
