@@ -8,6 +8,7 @@ const App = () => {
   const styles = StyleSheet.create({
     container: {
       flex: 1,
+      margin: 10,
       justifyContent: "center",
       alignItems: "center"
     },
@@ -19,13 +20,14 @@ const App = () => {
       flexDirection: "row",
       alignItems: "center",
       justifyContent: "space-between",
-      margin: 10,
       width: "100%"
     },
-    buttonStyle: {
-      margin: 10,
-    },
-
+    box: {
+      borderRadius: 5,
+      borderWidth: 2,
+      padding: 5,
+      textAlign: "center"
+    }
   })
 
   const [isDatePickerVisibleStart, setDatePickerVisibilityStart] = useState(false);
@@ -59,37 +61,81 @@ const App = () => {
     hideDatePickerEnd();
   };
 
+  const getTime = (date) => {
+    if (!date) {
+      return "00:00:00"
+    }
+    let hour = date.getHours()
+    if (hour < 10) {
+      hour = "0" + hour
+    }
+    let minute = date.getMinutes()
+    if (minute < 10) {
+      minute = "0" + minute
+    }
+    let second = date.getSeconds()
+    if (second < 10) {
+      second = "0" + second
+    }
+    return hour + ":" + minute + ":" + second
+  }
+
   return (
     <SafeAreaView style={styles.safeView}>
       <View style={styles.container}>
-        <View style={styles.horizontalView}>
+        <View style={[styles.horizontalView, { margin: 20 }]}>
           <ButtonView
-            text={startDate ? ("Start") : ("select start date")}
+            text={startDate ? (getTime(startDate)) : ("select start date")}
             onPress={showDatePickerStart}
           />
           <ButtonView
-            text={endDate ? ("End") : ("select start date")}
-            onPress={()=>{startDate?showDatePickerEnd():Alert.alert("Please select start date!")}}
+            text={endDate ? (getTime(endDate)) : ("select end date")}
+            onPress={() => { startDate ? showDatePickerEnd() : Alert.alert("Please select start date!") }}
           />
           <DateTimePickerModal
+            is24Hour={true}
             isVisible={isDatePickerVisibleStart}
             mode="datetime"
+            date={startDate ? (startDate) : (new Date())}
             onConfirm={handleConfirmStart}
             onCancel={() => { hideDatePickerStart(); setStartDate(null); setEndDate(null) }}
             headerTextIOS="Pick a date and time"
           />
           <DateTimePickerModal
+            is24Hour={true}
             isVisible={isDatePickerVisibleEnd}
             mode="datetime"
-            date={startDate?(startDate):(new Date())}
-            minimumDate={startDate?(startDate):(new Date(1950, 0, 1))}
+            date={startDate ? (startDate) : (new Date())}
+            minimumDate={startDate ? (startDate) : (new Date(1950, 0, 1))}
             onConfirm={handleConfirmEnd}
             onCancel={() => { hideDatePickerEnd(); setEndDate(null) }}
             headerTextIOS="Pick a date and time"
           />
         </View>
-        <View>
-
+        <View style={[styles.horizontalView, { margin: 5 }]}>
+          <Text style={[styles.box, { flex: 1, backgroundColor: "#B4E4DE" }]}>TZ</Text>
+          <Text style={[styles.box, { flex: 4, backgroundColor: "#B4E4DE" }]}>Start</Text>
+          <Text style={[styles.box, { flex: 4, backgroundColor: "#B4E4DE" }]}>End</Text>
+        </View>
+        <View style={[styles.horizontalView, { margin: 5 }]}>
+          <Text style={[styles.box, { flex: 1 }]}>IST</Text>
+          <Text style={[styles.box, { flex: 4 }]}>{getTime(startDate)}</Text>
+          <Text style={[styles.box, { flex: 4 }]}>{getTime(endDate)}</Text>
+        </View>
+        <View style={[styles.horizontalView, { margin: 5 }]}>
+          <Text style={[styles.box, { flex: 1 }]}>GMT</Text>
+          <Text style={[styles.box, { flex: 4 }]}>10:22 AM</Text>
+          <Text style={[styles.box, { flex: 4 }]}>10:52 AM</Text>
+        </View>
+        <View style={[styles.horizontalView, { margin: 5 }]}>
+          <Text style={[styles.box, { flex: 1 }]}>HKT</Text>
+          <Text style={[styles.box, { flex: 4 }]}>10:22 AM</Text>
+          <Text style={[styles.box, { flex: 4 }]}>10:52 AM</Text>
+        </View>
+        <View style={[styles.horizontalView, { margin: 5 }]}>
+          <Text style={[styles.box, { flex: 1 }]}>UTC</Text>
+          <Text style={[styles.box, { flex: 4 }]}>10:22 AM</Text>
+          <Text style={[styles.box, { flex: 4 }]}>10:52 AM</Text>
         </View>
       </View>
     </SafeAreaView>
