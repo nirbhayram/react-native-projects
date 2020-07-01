@@ -1,35 +1,99 @@
 import React, { useState } from "react";
-import { Button, View, SafeAreaView } from "react-native";
+import { Button, TouchableOpacity, SafeAreaView, StyleSheet, View, Text } from "react-native";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
- 
+import ButtonView from "./src/components/ButtonView";
+
 const App = () => {
-  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
- 
-  const showDatePicker = () => {
-    setDatePickerVisibility(true);
+
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      justifyContent: "center",
+      alignItems: "center"
+    },
+    safeView: {
+      flex: 1,
+      paddingTop: 30
+    },
+    horizontalView: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+      margin: 10,
+      width: "100%"
+    },
+    buttonStyle: {
+      margin: 10,
+    },
+
+  })
+
+  const [isDatePickerVisibleStart, setDatePickerVisibilityStart] = useState(false);
+  const [isDatePickerVisibleEnd, setDatePickerVisibilityEnd] = useState(false);
+  const [startDate, setStartDate] = useState(null)
+  const [endDate, setEndDate] = useState(null)
+
+  const showDatePickerStart = () => {
+    setDatePickerVisibilityStart(true);
   };
- 
-  const hideDatePicker = () => {
-    setDatePickerVisibility(false);
+
+  const hideDatePickerStart = () => {
+    setDatePickerVisibilityStart(false);
   };
- 
-  const handleConfirm = (date) => {
-    console.warn("A date has been picked: ", date);
-    hideDatePicker();
+
+  const handleConfirmStart = (date) => {
+    console.log("A date has been picked: ", date);
+    setStartDate(date)
+    hideDatePickerStart();
   };
- 
+
+  const showDatePickerEnd = () => {
+    setDatePickerVisibilityEnd(true);
+  };
+
+  const hideDatePickerEnd = () => {
+    setDatePickerVisibilityEnd(false);
+  };
+
+  const handleConfirmEnd = (date) => {
+    // console.warn("A date has been picked: ", date);
+    setEndDate(date)
+    hideDatePickerEnd();
+  };
+
   return (
-    <SafeAreaView style={{paddingTop:30}}>
-      <Button title="Show Date Picker" onPress={showDatePicker} />
-      <DateTimePickerModal
-        isVisible={isDatePickerVisible}
-        mode="datetime"
-        onConfirm={handleConfirm}
-        onCancel={hideDatePicker}
-        headerTextIOS="Pick a date and time"
-      />
+    <SafeAreaView style={styles.safeView}>
+      <View style={styles.container}>
+        <View style={styles.horizontalView}>
+          <ButtonView
+            text={startDate?("Start"):("select start date")}
+            onPress={showDatePickerStart}
+          />
+          <ButtonView
+            text={endDate?("End"):("select start date")}
+            onPress={showDatePickerEnd}
+          />
+          <DateTimePickerModal
+            isVisible={isDatePickerVisibleStart}
+            mode="datetime"
+            onConfirm={handleConfirmStart}
+            onCancel={hideDatePickerStart}
+            headerTextIOS="Pick a date and time"
+          />
+          <DateTimePickerModal
+            isVisible={isDatePickerVisibleEnd}
+            mode="datetime"
+            onConfirm={handleConfirmEnd}
+            onCancel={hideDatePickerEnd}
+            headerTextIOS="Pick a date and time"
+          />
+        </View>
+        <View>
+        
+        </View>
+      </View>
     </SafeAreaView>
   );
 };
- 
+
 export default App;
