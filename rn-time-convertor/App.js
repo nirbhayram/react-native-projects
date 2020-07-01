@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, TouchableOpacity, SafeAreaView, StyleSheet, View, Text } from "react-native";
+import { Button, TouchableOpacity, SafeAreaView, StyleSheet, View, Text, Alert } from "react-native";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import ButtonView from "./src/components/ButtonView";
 
@@ -69,18 +69,20 @@ const App = () => {
           />
           <ButtonView
             text={endDate ? ("End") : ("select start date")}
-            onPress={showDatePickerEnd}
+            onPress={()=>{startDate?showDatePickerEnd():Alert.alert("Please select start date!")}}
           />
           <DateTimePickerModal
             isVisible={isDatePickerVisibleStart}
             mode="datetime"
             onConfirm={handleConfirmStart}
-            onCancel={() => { hideDatePickerStart(); setStartDate(null) }}
+            onCancel={() => { hideDatePickerStart(); setStartDate(null); setEndDate(null) }}
             headerTextIOS="Pick a date and time"
           />
           <DateTimePickerModal
             isVisible={isDatePickerVisibleEnd}
             mode="datetime"
+            date={startDate?(startDate):(new Date())}
+            minimumDate={startDate?(startDate):(new Date(1950, 0, 1))}
             onConfirm={handleConfirmEnd}
             onCancel={() => { hideDatePickerEnd(); setEndDate(null) }}
             headerTextIOS="Pick a date and time"
