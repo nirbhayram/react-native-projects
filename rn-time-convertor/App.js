@@ -42,7 +42,6 @@ const App = () => {
   };
 
   const handleConfirmStart = (date) => {
-    console.log("A date has been picked: ", date);
     setStartDate(date)
     hideDatePickerStart();
   };
@@ -56,7 +55,6 @@ const App = () => {
   };
 
   const handleConfirmEnd = (date) => {
-    // console.warn("A date has been picked: ", date);
     setEndDate(date)
     hideDatePickerEnd();
   };
@@ -66,30 +64,30 @@ const App = () => {
       <View style={styles.container}>
         <View style={styles.horizontalView}>
           <ButtonView
-            text={startDate?("Start"):("select start date")}
+            text={startDate ? ("Start") : ("select start date")}
             onPress={showDatePickerStart}
           />
           <ButtonView
-            text={endDate?("End"):("select start date")}
+            text={endDate ? ("End") : ("select start date")}
             onPress={showDatePickerEnd}
           />
           <DateTimePickerModal
             isVisible={isDatePickerVisibleStart}
             mode="datetime"
             onConfirm={handleConfirmStart}
-            onCancel={hideDatePickerStart}
+            onCancel={() => { hideDatePickerStart(); setStartDate(null) }}
             headerTextIOS="Pick a date and time"
           />
           <DateTimePickerModal
             isVisible={isDatePickerVisibleEnd}
             mode="datetime"
             onConfirm={handleConfirmEnd}
-            onCancel={hideDatePickerEnd}
+            onCancel={() => { hideDatePickerEnd(); setEndDate(null) }}
             headerTextIOS="Pick a date and time"
           />
         </View>
         <View>
-        
+
         </View>
       </View>
     </SafeAreaView>
