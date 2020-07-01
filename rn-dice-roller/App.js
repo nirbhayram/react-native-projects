@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, SafeAreaView, Image, TouchableOpacity, Alert } from 'react-native';
+import { StyleSheet, SafeAreaView,View, Image, TouchableOpacity, Alert } from 'react-native';
 
 export default function App() {
   const [imagevariable1, setImagevariable1] = useState(require("./src/images/dice1.png"));
@@ -30,9 +30,11 @@ export default function App() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <TouchableOpacity onPress={() => {setImagevariable1(rollTheDice);setImagevariable2(rollTheDice)}}>
-        <Image source={imagevariable1}></Image>
-        <Image source={imagevariable2}></Image>
+      <TouchableOpacity onPress={() => { setImagevariable1(rollTheDice); setImagevariable2(rollTheDice) }}>
+        <View style={styles.viewStyle}>
+          <Image source={imagevariable1}></Image>
+          <Image source={imagevariable2}></Image>
+        </View>
       </TouchableOpacity>
     </SafeAreaView>
   );
@@ -45,4 +47,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  viewStyle:{
+    flex:1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  }
 });
