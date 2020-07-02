@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button, TouchableOpacity, SafeAreaView, StyleSheet, View, Text, Alert } from "react-native";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import ButtonView from "./src/components/ButtonView";
-import timeConvert from './src/package/TimeConvert'
+import {timeConvert,getBeautifyDateAndTime} from './src/package/TimeConvert'
 
 const App = () => {
 
@@ -48,6 +48,7 @@ const App = () => {
     timeConvert('IST', date).forEach((value,key)=>{
       console.log(key+" "+value)
     })
+    console.log(date.getHours()+"*******")
     setStartDate(date)
     hideDatePickerStart();
   };
@@ -89,11 +90,11 @@ const App = () => {
       <View style={styles.container}>
         <View style={[styles.horizontalView, { margin: 20 }]}>
           <ButtonView
-            text={startDate ? (getTime(startDate)) : ("select start date")}
+            text={startDate ? (getBeautifyDateAndTime(startDate)) : ("select start date")}
             onPress={showDatePickerStart}
           />
           <ButtonView
-            text={endDate ? (getTime(endDate)) : ("select end date")}
+            text={endDate ? (getBeautifyDateAndTime(endDate)) : ("select end date")}
             onPress={() => { startDate ? showDatePickerEnd() : Alert.alert("Please select start date!") }}
           />
           <DateTimePickerModal

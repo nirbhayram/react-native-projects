@@ -87,7 +87,12 @@ const beautifyNumber = (num) => {
     return `${num}`
 }
 
-const timeConvert = (timezone, date, wantedTime = ['IST', 'GMT', 'HKT']) => {
+export const getBeautifyDateAndTime = (value) => {
+    console.log(value.getHours()+"############")
+    return `${beautifyNumber(value.getHours())}:${beautifyNumber(value.getMinutes())}:${beautifyNumber(value.getSeconds())} ${getDayString(value.getDay())} ${value.getDate()} ${getMonthString(value.getMonth())}, ${value.getFullYear()}`
+}
+
+export const timeConvert = (timezone, date, wantedTime = ['IST', 'GMT', 'HKT']) => {
     let times = getAllTime(timezone, date, wantedTime)
     let allTimes = new Map()
     times.forEach((value, key) => {
@@ -99,6 +104,6 @@ const timeConvert = (timezone, date, wantedTime = ['IST', 'GMT', 'HKT']) => {
 
 // console.log(TimeConvert('IST',new Date()))
 
-export default timeConvert;
+// export default timeConvert;
 
 
