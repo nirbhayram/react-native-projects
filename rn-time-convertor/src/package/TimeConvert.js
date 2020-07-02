@@ -1,3 +1,4 @@
+
 const TIME_ZONE = {
     IST: {
         offset: 0
@@ -10,9 +11,9 @@ const TIME_ZONE = {
     }
 }
 
-const getAllTime = (_timeZone, _date, _wanted ) => {
-    console.log(_date.getTime())
+const getAllTime = (_timeZone, _date, _wanted) => {
     const _retObject = new Map();
+    // console.log(`****************${_timeZone} ${_date} ${_wanted}`)
     _wanted.map((timeZone) => {
         // console.log(`${TIME_ZONE[timeZone]['offset']} ${TIME_ZONE[_timeZone]['offset']}`)
         let convertedTime = addOffsetToDate(_date, TIME_ZONE[timeZone]['offset'] - TIME_ZONE[_timeZone]['offset'])
@@ -86,18 +87,18 @@ const beautifyNumber = (num) => {
     return `${num}`
 }
 
-const TimeConvert = (timezone,date,wantedTime = ['IST', 'GMT', 'HKT']) => {
-    let times = getAllTime(timezone, date,wantedTime)
+const timeConvert = (timezone, date, wantedTime = ['IST', 'GMT', 'HKT']) => {
+    let times = getAllTime(timezone, date, wantedTime)
     let allTimes = new Map()
     times.forEach((value, key) => {
-        allTimes.set(key,`${beautifyNumber(value.getHours())}:${beautifyNumber(value.getMinutes())}:${beautifyNumber(value.getSeconds())} ${getDayString(value.getDay())} ${value.getDate()} ${getMonthString(value.getMonth())}, ${value.getFullYear()}`)
+        allTimes.set(key, `${beautifyNumber(value.getHours())}:${beautifyNumber(value.getMinutes())}:${beautifyNumber(value.getSeconds())} ${getDayString(value.getDay())} ${value.getDate()} ${getMonthString(value.getMonth())}, ${value.getFullYear()}`)
         // console.log(`${beautifyNumber(value.getHours())}:${beautifyNumber(value.getMinutes())}:${beautifyNumber(value.getSeconds())} ${getDayString(value.getDay())} ${value.getDate()} ${getMonthString(value.getMonth())}, ${value.getFullYear()}`)
     })
     return allTimes;
 }
 
-console.log(TimeConvert('IST',new Date()))
+// console.log(TimeConvert('IST',new Date()))
 
-// export default TimeConvert;
+export default timeConvert;
 
 

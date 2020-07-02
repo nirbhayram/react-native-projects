@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Button, TouchableOpacity, SafeAreaView, StyleSheet, View, Text, Alert } from "react-native";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import ButtonView from "./src/components/ButtonView";
+import timeConvert from './src/package/TimeConvert'
 
 const App = () => {
 
@@ -44,6 +45,9 @@ const App = () => {
   };
 
   const handleConfirmStart = (date) => {
+    timeConvert('IST', date).forEach((value,key)=>{
+      console.log(key+" "+value)
+    })
     setStartDate(date)
     hideDatePickerStart();
   };
