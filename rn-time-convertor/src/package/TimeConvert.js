@@ -10,7 +10,7 @@ const TIME_ZONE = {
     }
 }
 
-const getAllTime = (_timeZone, _date, _wanted = ['IST', 'GMT', 'HKT']) => {
+const getAllTime = (_timeZone, _date, _wanted ) => {
     console.log(_date.getTime())
     const _retObject = new Map();
     _wanted.map((timeZone) => {
@@ -79,7 +79,25 @@ const getDayString = (num) => {
     }
 }
 
-let times = getAllTime('IST', new Date())
-times.forEach((value, key) => {
+const beautifyNumber = (num) => {
+    if (num < 10) {
+        return `0${num}`
+    }
+    return `${num}`
+}
 
-})
+const TimeConvert = (timezone,date,wantedTime = ['IST', 'GMT', 'HKT']) => {
+    let times = getAllTime(timezone, date,wantedTime)
+    let allTimes = new Map()
+    times.forEach((value, key) => {
+        allTimes.set(key,`${beautifyNumber(value.getHours())}:${beautifyNumber(value.getMinutes())}:${beautifyNumber(value.getSeconds())} ${getDayString(value.getDay())} ${value.getDate()} ${getMonthString(value.getMonth())}, ${value.getFullYear()}`)
+        // console.log(`${beautifyNumber(value.getHours())}:${beautifyNumber(value.getMinutes())}:${beautifyNumber(value.getSeconds())} ${getDayString(value.getDay())} ${value.getDate()} ${getMonthString(value.getMonth())}, ${value.getFullYear()}`)
+    })
+    return allTimes;
+}
+
+console.log(TimeConvert('IST',new Date()))
+
+// export default TimeConvert;
+
+
