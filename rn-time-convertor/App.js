@@ -49,13 +49,13 @@ const App = () => {
   const handleConfirmStart = (date) => {
     const timeMapFromTimeConvertor = timeConvert('IST', date)
     timeMapFromTimeConvertor.forEach((value, key) => {
-      console.log(key + " " + value)
+      // console.log(key + " " + value)
     })
     setTimeout(() => {
       setStartDate(date)
       setStartTimeMap(timeMapFromTimeConvertor)
     }, 10);
-    console.log(date.getHours() + "*******")
+    // console.log(date.getHours() + "*******")
     hideDatePickerStart();
   };
   const showDatePickerEnd = () => {
@@ -69,7 +69,7 @@ const App = () => {
   const handleConfirmEnd = (date) => {
       const timeMapFromTimeConvertor = timeConvert('IST', date)
     timeMapFromTimeConvertor.forEach((value, key) => {
-      console.log(key + " " + value)
+      // console.log(key + " " + value)
     })
     setTimeout(() => {
       setEndDate(date)

@@ -88,7 +88,7 @@ const beautifyNumber = (num) => {
 }
 
 export const getBeautifyDateAndTime = (value) => {
-    console.log(value.getHours()+"############")
+    // console.log(value.getHours()+"############")
     return `${beautifyNumber(value.getHours())}:${beautifyNumber(value.getMinutes())}:${beautifyNumber(value.getSeconds())} ${getDayString(value.getDay())} ${value.getDate()} ${getMonthString(value.getMonth())}, ${value.getFullYear()}`
 }
 

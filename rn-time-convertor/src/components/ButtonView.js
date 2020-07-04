@@ -9,7 +9,7 @@ export default function ButtonView({ text="button", onPress}) {
             paddingVertical: 15,
             backgroundColor: "#8FF7A7",
             borderColor: "#ffffff",
-            borderRadius: 10
+            borderRadius: 10,
         },
         text: {
             fontSize: 15
