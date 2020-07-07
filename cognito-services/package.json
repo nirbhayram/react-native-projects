@@ -8,6 +8,8 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@react-native-community/cli": "^4.10.1",
+    "@react-native-community/netinfo": "^5.9.4",
     "aws-amplify": "^3.0.19",
     "aws-amplify-react-native": "^4.2.1",
     "expo": "~38.0.8",
