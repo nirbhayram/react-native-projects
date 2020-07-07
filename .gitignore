@@ -2,6 +2,7 @@
 */npm-debug.*
 */web-build/
 */.expo/*
+*/*config.js
 */.DS_Store
 
 rn-component-style-prop/node_modules/**/*
