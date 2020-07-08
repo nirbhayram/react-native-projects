@@ -10,7 +10,10 @@ App = () => {
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={SignIn}>
-        <Text>Open up App.js to start working on your app!</Text>
+        <Text>SignIn</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={signOut}>
+        <Text>SignOut</Text>
       </TouchableOpacity>
       <StatusBar style="auto" />
     </View>
@@ -25,13 +28,21 @@ async function SignIn() {
     console.log('error signing in', error);
   }
 }
+async function signOut() {
+    try {
+        await Auth.signOut();
+        console.log('User signed out')
+    } catch (error) {
+        console.log('error signing out: ', error);
+    }
+}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-around',
   },
 });
 
