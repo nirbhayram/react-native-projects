@@ -15,6 +15,12 @@ App = () => {
       <TouchableOpacity onPress={SignIn}>
         <Text>SignIn</Text>
       </TouchableOpacity>
+      <TouchableOpacity onPress={getCurrentUser}>
+        <Text>getCurrentUser</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={setCurrentUserAttributes}>
+        <Text>setCurrentUserAttributes</Text>
+      </TouchableOpacity>
       <TouchableOpacity onPress={signOut}>
         <Text>SignOut</Text>
       </TouchableOpacity>
@@ -46,14 +52,37 @@ async function signUp() {
       username: "username",
       password: "password",
       attributes: {
-        email: "nirbhay@gmail.com",     
-        'custom:balance' : "123123"
+        email: "nirbhay@gmail.com",
+        'custom:balance': "123123"
       }
     });
     console.log({ user });
   } catch (error) {
     console.log('error signing up:', error);
   }
+}
+
+async function getCurrentUser() {
+  Auth.currentSession()
+    .then(data => console.log(data))
+    .catch(err => console.log(err));
+
+  let user = await Auth.currentAuthenticatedUser({
+    bypassCache: true //true: that means direct get the attributes from the aws user pool
+  });
+
+  const { attributes } = user;
+  console.log(attributes)
+}
+
+async function setCurrentUserAttributes() {
+  let user = await Auth.currentAuthenticatedUser();
+
+  let result = await Auth.updateUserAttributes(user, {
+    "custom:balance": "123123",
+    "email_verified": true,
+  });
+  console.log(result);
 }
 
 const styles = StyleSheet.create({
