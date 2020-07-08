@@ -9,6 +9,9 @@ Amplify.configure(awsconfig);
 App = () => {
   return (
     <View style={styles.container}>
+      <TouchableOpacity onPress={signUp}>
+        <Text>signUp</Text>
+      </TouchableOpacity>
       <TouchableOpacity onPress={SignIn}>
         <Text>SignIn</Text>
       </TouchableOpacity>
@@ -22,19 +25,35 @@ App = () => {
 
 async function SignIn() {
   try {
-    const user = await Auth.signIn('nirbhay', 'nirbhay');
-    console.log('User signed in ',user)
+    const user = await Auth.signIn('username', 'password');
+    console.log('User signed in ', user)
   } catch (error) {
     console.log('error signing in', error);
   }
 }
 async function signOut() {
-    try {
-        await Auth.signOut();
-        console.log('User signed out')
-    } catch (error) {
-        console.log('error signing out: ', error);
-    }
+  try {
+    await Auth.signOut();
+    console.log('User signed out')
+  } catch (error) {
+    console.log('error signing out: ', error);
+  }
+}
+
+async function signUp() {
+  try {
+    const user = await Auth.signUp({
+      username: "username",
+      password: "password",
+      attributes: {
+        email: "nirbhay@gmail.com",     
+        'custom:balance' : "123123"
+      }
+    });
+    console.log({ user });
+  } catch (error) {
+    console.log('error signing up:', error);
+  }
 }
 
 const styles = StyleSheet.create({
