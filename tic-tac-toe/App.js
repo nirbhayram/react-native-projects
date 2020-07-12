@@ -1,6 +1,5 @@
-import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
+import { StyleSheet, View, SafeAreaView, TouchableOpacity } from 'react-native';
 
 export default function App() {
 
@@ -14,7 +13,6 @@ export default function App() {
       backgroundColor: '#B49FCC',
     },
     rowView: {
-      // flex: 1,
       height: "11%",
       width: "100%",
       flexDirection: "row",
@@ -24,9 +22,17 @@ export default function App() {
     box: {
       backgroundColor: "#ffffff",
       width: widthOfBox,
-      height: "100%"
+      height: widthOfBox,
+      borderWidth: 2,
+      borderRadius: 10,
+      marginVertical: 10,
+      marginHorizontal: 10
     }
   });
+
+  const boxPressed = (number) => {
+    console.log(number)
+  }
 
 
   return (
@@ -34,17 +40,23 @@ export default function App() {
       <View style={[styles.rowView, { backgroundColor: "#6D466B" }]} onLayout={
         (event) => {
           var { x, y, width, height } = event.nativeEvent.layout;
-          setWidthOfBox(height)
+          setWidthOfBox(height - 10)
           console.log(height);
         }}
       >
-        <View style={styles.box}></View>
-        <View style={styles.box}></View>
-        <View style={styles.box}></View>
+        <TouchableOpacity onPress={() => boxPressed(0)}>
+          <View style={styles.box}>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity>
+          <View style={styles.box}></View>
+        </TouchableOpacity><TouchableOpacity>
+          <View style={styles.box}></View>
+        </TouchableOpacity>
       </View>
       <View style={[styles.rowView, { backgroundColor: "#412234" }]}>
       </View>
-      <View style={[styles.rowView, { backgroundColor: "#ffffff" }]}>
+      <View style={[styles.rowView, { backgroundColor: "#6D466B" }]}>
       </View>
     </SafeAreaView>
   );
