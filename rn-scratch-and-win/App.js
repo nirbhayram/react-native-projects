@@ -1,10 +1,15 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React, { useState } from 'react';
 import { Dimensions, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import { FontAwesome } from "@expo/vector-icons"
 
 export default function App() {
+
+  const [itemArray, setItemArray] = useState(new Array(25).fill("empty"))
+  const [randomNumber, setRandomNumber] = useState(-1)
+
+
   return (
     <View style={styles.container}>
       <View style={styles.textView}>
