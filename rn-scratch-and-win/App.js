@@ -9,10 +9,11 @@ export default function App() {
 
   const [itemArray, setItemArray] = useState(new Array(25).fill("empty"));
   const [randomNumber, setRandomNumber] = useState(-1)
+  const [reset, setReset] = useState(1)
 
   useEffect(() => {
     generateRandomNumber()
-  }, [])
+  }, [reset])
 
   const generateRandomNumber = () => {
     let randomNumber = Math.floor(Math.random() * 25);
@@ -48,8 +49,9 @@ export default function App() {
     setItemArray(tempItemArray);
   }
 
-  const reset = ()=>{
-    
+  const resetGame = ()=>{
+    setReset(reset+1);
+    setItemArray(new Array(25).fill("empty"));
   }
 
   return (
@@ -296,7 +298,7 @@ export default function App() {
           </TouchableOpacity>
         </View>
       </View>
-      <Button bordered dark style={styles.button}>
+      <Button bordered dark style={styles.button} onPress={resetGame}>
         <Text style={styles.buttonText}>Reset</Text>
       </Button>
       <Button bordered dark style={styles.button}>
