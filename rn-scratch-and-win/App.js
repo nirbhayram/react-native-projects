@@ -54,6 +54,13 @@ export default function App() {
     setItemArray(new Array(25).fill("empty"));
   }
 
+  const showAll = ()=>{
+    let tempArray = [...itemArray]
+    tempArray.fill("unlucky")
+    tempArray[randomNumber] = "lucky"
+    setItemArray(tempArray)
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.textView}>
@@ -301,7 +308,7 @@ export default function App() {
       <Button bordered dark style={styles.button} onPress={resetGame}>
         <Text style={styles.buttonText}>Reset</Text>
       </Button>
-      <Button bordered dark style={styles.button}>
+      <Button bordered dark style={styles.button} onPress={showAll}>
         <Text style={styles.buttonText}>Show all</Text>
       </Button>
     </View>
