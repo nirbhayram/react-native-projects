@@ -1,5 +1,5 @@
 import React from 'react';
-import { SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Dimensions, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import { Audio } from 'expo-av';
 
@@ -99,8 +99,9 @@ const styles = StyleSheet.create({
     flexDirection: "column"
   },
   view: {
-    margin: 10,
-    width: "100%",
+    marginVertical: 10,
+    padding:10,
+    width: Dimensions.get('window').width,
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
