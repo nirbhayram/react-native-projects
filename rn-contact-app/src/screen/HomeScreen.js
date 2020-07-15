@@ -6,15 +6,32 @@ import { Button } from 'native-base';
 
 export default function HomeScreen({ route, navigation }) {
 
-    const getAllKeys = async () => {
-        let keys = []
-        try {
-            keys = await AsyncStorage.getAllKeys()
-        } catch (e) {
-            // read key error
-        }
+    const getAllValues = async keys => {
+        await AsyncStorage.multiGet(
+            keys
+        ).then(
+            data=>{
+                console.log(data)
+            }
+        ).catch(
+            error=>{
+                console.log(error)
+            }
+        )
+    }
 
-        console.log(keys)
+    const getAllKeys = async () => {
+        await AsyncStorage.getAllKeys(
+        ).then(
+            keys => {
+                console.log(keys)
+                getAllValues(keys)
+            }
+        ).catch(
+            error => {
+                console.log(error)
+            }
+        )
     }
 
     return (

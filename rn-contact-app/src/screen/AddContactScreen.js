@@ -92,7 +92,7 @@ export default function AddContactScreen({ route, navigation }) {
                                 autoCorrect={false}
                                 autoCapitalize="none"
                                 keyboardType="default"
-                                onChangeText={fname => { setState({ fname }) }}
+                                onChangeText={fname => { setState({ ...state, fname }) }}
                             />
                         </Item>
                         <Item style={styles.inputItem}>
@@ -101,7 +101,7 @@ export default function AddContactScreen({ route, navigation }) {
                                 autoCorrect={false}
                                 autoCapitalize="none"
                                 keyboardType="default"
-                                onChangeText={lname => { setState({ lname }) }}
+                                onChangeText={lname => { setState({ ...state, lname }) }}
                             />
                         </Item>
                         <Item style={styles.inputItem}>
@@ -110,7 +110,7 @@ export default function AddContactScreen({ route, navigation }) {
                                 autoCorrect={false}
                                 autoCapitalize="none"
                                 keyboardType="default"
-                                onChangeText={phone => { setState({ phone }) }}
+                                onChangeText={phone => { setState({ ...state, phone }) }}
                             />
                         </Item>
                         <Item style={styles.inputItem}>
@@ -119,7 +119,7 @@ export default function AddContactScreen({ route, navigation }) {
                                 autoCorrect={false}
                                 autoCapitalize="none"
                                 keyboardType="default"
-                                onChangeText={email => { setState({ email }) }}
+                                onChangeText={email => { setState({ ...state, email }) }}
                             />
                         </Item>
 
@@ -128,7 +128,7 @@ export default function AddContactScreen({ route, navigation }) {
                             bordered
                             rowSpan={4}
                             placeholder="Address"
-                            onChangeText={(address) => { setState({ address }) }} />
+                            onChangeText={(address) => { setState({ ...state, address }) }} />
 
                     </Form>
 
