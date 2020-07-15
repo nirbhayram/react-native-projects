@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, { useEffect } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, FlatList } from 'react-native'
 import AsyncStorage from '@react-native-community/async-storage';
 import { AntDesign } from '@expo/vector-icons';
@@ -7,10 +7,10 @@ import { Button } from 'native-base';
 export default function HomeScreen({ route, navigation }) {
 
     useEffect(() => {
-        navigation.addListener("focus",()=>{
+        navigation.addListener("focus", () => {
             getAllKeys()
         })
-    }, [])
+    }, [navigation])
 
     const getAllKeys = async () => {
         await AsyncStorage.getAllKeys(
@@ -30,15 +30,26 @@ export default function HomeScreen({ route, navigation }) {
         await AsyncStorage.multiGet(
             keys
         ).then(
-            data=>{
+            data => {
                 console.log(data)
             }
         ).catch(
-            error=>{
+            error => {
                 console.log(error)
             }
         )
     }
+
+    const clearAll = async () => {
+        try {
+            await AsyncStorage.clear()
+        } catch (e) {
+            // clear error
+        }
+
+        console.log('Done.')
+    }
+
 
     return (
         <View style={styles.container}>
@@ -52,8 +63,8 @@ export default function HomeScreen({ route, navigation }) {
                     size={30}
                     color="white" />
             </TouchableOpacity>
-            <Button onPress={() => { getAllKeys() }}>
-                <Text>Save</Text>
+            <Button onPress={() => { clearAll() }}>
+                <Text>clear</Text>
             </Button>
         </View>
     )
