@@ -4,6 +4,7 @@ import * as React from 'react';
 import { View, Text, Button, TextInput } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+const Stack = createStackNavigator();
 
 function HomeScreen({ navigation, route }) {
   React.useEffect(() => {
@@ -80,7 +81,6 @@ function DetailsScreen({ route, navigation }) {
   );
 }
 
-const Stack = createStackNavigator();
 
 function App() {
   return (

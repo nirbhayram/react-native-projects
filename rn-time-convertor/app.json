@@ -18,13 +18,13 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "time-convertor"
+      "bundleIdentifier": "in.nirbhayram.time.convertor"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "android": {
-      "package": "time-convertor"
+      "package": "in.nirbhayram.time.convertor"
     },
     "entryPoint": "node_modules/expo/AppEntry.js"
   }
