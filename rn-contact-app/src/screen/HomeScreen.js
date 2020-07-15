@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, FlatList } from 'react-native'
 import AsyncStorage from '@react-native-community/async-storage';
 import { AntDesign } from '@expo/vector-icons';
@@ -6,19 +6,11 @@ import { Button } from 'native-base';
 
 export default function HomeScreen({ route, navigation }) {
 
-    const getAllValues = async keys => {
-        await AsyncStorage.multiGet(
-            keys
-        ).then(
-            data=>{
-                console.log(data)
-            }
-        ).catch(
-            error=>{
-                console.log(error)
-            }
-        )
-    }
+    useEffect(() => {
+        navigation.addListener("focus",()=>{
+            getAllKeys()
+        })
+    }, [])
 
     const getAllKeys = async () => {
         await AsyncStorage.getAllKeys(
@@ -29,6 +21,20 @@ export default function HomeScreen({ route, navigation }) {
             }
         ).catch(
             error => {
+                console.log(error)
+            }
+        )
+    }
+
+    const getAllValues = async keys => {
+        await AsyncStorage.multiGet(
+            keys
+        ).then(
+            data=>{
+                console.log(data)
+            }
+        ).catch(
+            error=>{
                 console.log(error)
             }
         )
