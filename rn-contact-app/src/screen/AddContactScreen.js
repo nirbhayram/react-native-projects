@@ -109,7 +109,7 @@ export default function AddContactScreen({ route, navigation }) {
                             <Input
                                 autoCorrect={false}
                                 autoCapitalize="none"
-                                keyboardType="default"
+                                keyboardType="number-pad"
                                 onChangeText={phone => { setState({ ...state, phone }) }}
                             />
                         </Item>

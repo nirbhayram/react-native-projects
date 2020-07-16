@@ -1,12 +1,12 @@
-import React, { useEffect,useState } from 'react'
-import { View, Text, StyleSheet, TouchableOpacity, FlatList } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { View, StyleSheet, TouchableOpacity, FlatList, Linking, Platform } from 'react-native'
 import AsyncStorage from '@react-native-community/async-storage';
 import { AntDesign } from '@expo/vector-icons';
-import { Button } from 'native-base';
+import {  Card, CardItem, Text, Body } from "native-base";
 
 export default function HomeScreen({ route, navigation }) {
 
-    const [data ,setData] = useState([])
+    const [data, setData] = useState([])
 
     useEffect(() => {
         navigation.addListener("focus", () => {
@@ -18,7 +18,6 @@ export default function HomeScreen({ route, navigation }) {
         await AsyncStorage.getAllKeys(
         ).then(
             keys => {
-                console.log(keys)
                 getAllValues(keys)
             }
         ).catch(
@@ -33,14 +32,8 @@ export default function HomeScreen({ route, navigation }) {
             keys
         ).then(
             data => {
-                // console.log(data);
-                let state_data = []
-                data.map(item=>{
-                    state_data.push(JSON.parse(item[1]))
-                    // console.log(item[1])
-                })
-                console.log(state_data)
-                setData(state_data)
+                console.log(data)
+                setData(data)
             }
         ).catch(
             error => {
@@ -49,19 +42,65 @@ export default function HomeScreen({ route, navigation }) {
         )
     }
 
-    const clearAll = async () => {
-        try {
-            await AsyncStorage.clear()
-        } catch (e) {
-            // clear error
-        }
+    const deleteContact = async (key) => {
+        await AsyncStorage.removeItem(key)
+            .then(()=>{
+                getAllKeys()
+            })
+            .catch(error=>{
+                console.log(error)
+            })
+    }
 
-        console.log('Done.')
+    const callContact = phone =>{
+        let phoneNumber = phone;
+        if (Platform.OS !== "android") {
+            phoneNumber = `telpromt:${phone}`
+        }else{
+            phoneNumber = `tel:${phone}`
+        }
+        Linking.canOpenURL(phoneNumber)
+            .then(()=>{
+                Linking.openURL(phoneNumber)
+            })
+            .catch(error=>{
+                console.log(error)
+            })
     }
 
 
     return (
         <View style={styles.container}>
+            <View>
+                <FlatList
+                    data={data}
+                    renderItem={({ item }) => {
+                        let contact = JSON.parse(item[1])
+                        return (
+                            <Card>
+                                <CardItem header bordered>
+                                    <Text>{contact.fname} {contact.lname}</Text>
+                                </CardItem>
+                                <CardItem bordered button onPress={()=>{
+                                    callContact(contact.phone)
+                                }}>
+                                    <Body>
+                                        <Text>Phone : {contact.phone}</Text>
+                                        <Text>Email : {contact.email}</Text>
+                                        <Text>Address : {contact.address}</Text>
+                                    </Body>
+                                </CardItem>
+                                <CardItem footer bordered button onPress={() => {
+                                    deleteContact(item[0].toString())
+                                }}>
+                                    <Text style={{ color: "red" }}>Delete</Text>
+                                </CardItem>
+                            </Card>
+                        )
+                    }}
+                    keyExtractor={item => item[0].toString()}
+                />
+            </View>
             <TouchableOpacity
                 style={styles.floatButton}
                 onPress={() => {
@@ -72,9 +111,6 @@ export default function HomeScreen({ route, navigation }) {
                     size={30}
                     color="white" />
             </TouchableOpacity>
-            <Button onPress={() => { clearAll() }}>
-                <Text>clear</Text>
-            </Button>
         </View>
     )
 }
