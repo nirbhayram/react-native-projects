@@ -55,7 +55,7 @@ export default function HomeScreen({ route, navigation }) {
     const callContact = phone =>{
         let phoneNumber = phone;
         if (Platform.OS !== "android") {
-            phoneNumber = `telpromt:${phone}`
+            phoneNumber = `tel://${phone}`
         }else{
             phoneNumber = `tel:${phone}`
         }
