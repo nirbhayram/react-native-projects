@@ -1,10 +1,12 @@
-import React, { useEffect } from 'react'
+import React, { useEffect,useState } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, FlatList } from 'react-native'
 import AsyncStorage from '@react-native-community/async-storage';
 import { AntDesign } from '@expo/vector-icons';
 import { Button } from 'native-base';
 
 export default function HomeScreen({ route, navigation }) {
+
+    const [data ,setData] = useState([])
 
     useEffect(() => {
         navigation.addListener("focus", () => {
@@ -31,7 +33,14 @@ export default function HomeScreen({ route, navigation }) {
             keys
         ).then(
             data => {
-                console.log(data)
+                // console.log(data);
+                let state_data = []
+                data.map(item=>{
+                    state_data.push(JSON.parse(item[1]))
+                    // console.log(item[1])
+                })
+                console.log(state_data)
+                setData(state_data)
             }
         ).catch(
             error => {
