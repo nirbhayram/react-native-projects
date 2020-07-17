@@ -38,21 +38,27 @@ const reducer = (state = initialState, action) => {
 	switch (action.type) {
 		case "GOOD":
 			var id = action.payload;
-			var finalSalary = state[id].salary + (state[id].salary * 0.1)
-			var employee = {
-				...state[id],
-				salary: finalSalary
-			}
-			return { ...state, id : employee }
+			var employees = state;
+			var salary = employees[id]["salary"]
+			salary = salary + (salary*0.1)
+			employees[id]["salary"] = salary
+			console.log(`id is ${id} and salary is ${salary}`)
+			return {
+				...state, 
+				id:{
+					id,
+					name: "Nirbhay",
+					salary
+				}
+			} 
 
 		case "BAD":
 			var id = action.payload;
-			var finalSalary = state[id].salary - (state[id].salary * 0.1)
-			var employee = {
-				...state[id],
-				salary: finalSalary
-			}
-			return { ...state, id: employee }
+			var employees = state;
+			var salary = employees[id]["salary"]
+			salary = salary - (salary*0.1)
+			employees[id]["salary"] = salary
+			return employees
 		default:
 			return state;
 	}
