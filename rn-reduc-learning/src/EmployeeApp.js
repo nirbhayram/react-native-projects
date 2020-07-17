@@ -37,7 +37,7 @@ function EmployeeApp({ data, good, bad }) {
                 <FlatList
                     data={DATA}
                     renderItem={itemRender}
-                    keyExtractor={item => item.id}
+                    keyExtractor={item => item.id.toString()}
                 />
             </SafeAreaView>
         </View>

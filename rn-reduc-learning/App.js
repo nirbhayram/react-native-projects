@@ -35,41 +35,33 @@ let initialState = {
 }
 
 const reducer = (state = initialState, action) => {
+
 	switch (action.type) {
 		case "GOOD":
-			var id = action.payload;
-			var employees = state;
-			var salary = employees[id]["salary"]
-			salary = salary + (salary*0.1)
-			employees[id]["salary"] = salary
-			console.log(`id is ${id} and salary is ${salary}`)
-			return {
-				...state, 
-				id:{
-					id,
-					name: "Nirbhay",
-					salary
-				}
-			} 
-
+			var id = action?.payload;
+			var salary = state[id].salary;
+			var increment = 1000
+			var finalSalary = salary + increment;
+			state[id]["salary"] = finalSalary;
+			return Object.assign({}, state)
 		case "BAD":
-			var id = action.payload;
-			var employees = state;
-			var salary = employees[id]["salary"]
-			salary = salary - (salary*0.1)
-			employees[id]["salary"] = salary
-			return employees
+			var id = action?.payload;
+			var salary = state[id].salary;
+			var increment = 1000
+			var finalSalary = salary - increment;
+			state[id]["salary"] = finalSalary;
+			return Object.assign({}, state)
 		default:
 			return state;
 	}
 }
 
-let store  = createStore(reducer)
+let store = createStore(reducer)
 
 export default function App() {
 	return (
 		<Provider store={store}>
-			<EmployeeApp/>
+			<EmployeeApp />
 		</Provider>
 	);
 }
