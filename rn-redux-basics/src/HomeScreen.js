@@ -4,14 +4,14 @@ import { StyleSheet, View } from 'react-native';
 import { Button, Text } from 'native-base';
 import { connect } from 'react-redux'
 
-function HomeScreen({ mycounter, incCounter, decCounter }) {
+function HomeScreen({ counter, increaseCounter, decreaseCounter }) {
     return (
         <View style={styles.container}>
-            <Button bordered onPress={incCounter}>
+            <Button bordered onPress={increaseCounter}>
                 <Text>Increment</Text>
             </Button>
-            <Text>{mycounter}</Text>
-            <Button bordered danger onPress={decCounter}>
+            <Text>{counter}</Text>
+            <Button bordered danger onPress={decreaseCounter}>
                 <Text>Decrement</Text>
             </Button>
             <StatusBar style="auto" />
@@ -19,24 +19,24 @@ function HomeScreen({ mycounter, incCounter, decCounter }) {
     );
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state){
     return {
-        mycounter: state.myCounter
+        counter: state?.myCounter
     }
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch){
     return {
-        incCounter: () => {
-            dispatch({ type: "INC_COUNTER" })
+        increaseCounter: ()=>{
+            dispatch({type: "INC_COUNTER"})
         },
-        decCounter: () => {
-            dispatch({ type: "DEC_COUNTER" })
+        decreaseCounter: ()=>{
+            dispatch({type:"DEC_COUNTER"})
         }
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
+export default connect(mapStateToProps,mapDispatchToProps)(HomeScreen);
 
 const styles = StyleSheet.create({
     container: {

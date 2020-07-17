@@ -12,19 +12,28 @@ var initialState = {
 const reducer = (state = initialState, action) => {
 	switch (action.type) {
 		case "INC_COUNTER":
-			return { ...state, myCounter: state.myCounter + 1 }
+			if (state.myCounter < 10) {
+				return { ...state, myCounter: state.myCounter + 1 }
+			} else {
+				return state
+			}
 		case "DEC_COUNTER":
-			return { ...state, myCounter: state.myCounter - 1 }
+			if (state.myCounter > 0) {
+				return { ...state, myCounter: state.myCounter - 1 }
+			} else {
+				return state
+			}
+		default:
+			return state;
 	}
-	return state;
 }
 
-const store = createStore(reducer)
+let store = createStore(reducer);
 
 export default function App() {
 	return (
 		<Provider store={store}>
-			<HomeScreen/>
+			<HomeScreen />
 		</Provider>
 	);
 }
