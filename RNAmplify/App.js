@@ -17,9 +17,9 @@ export default function App() {
 
   async function signIn() {
     try {
-      const user = await Auth.signIn('nirbhaycd@gmail.com', 'HelloWorld@123');
+      const user = await Auth.signIn('nirbhay', 'HelloWorld@123');
       console.log(user)
-      console.log(`Bearer ${(await Auth.currentSession()).getIdToken().getJwtToken()}`)
+      console.log(`Authorization:Bearer ${(await Auth.currentSession()).getIdToken().getJwtToken()}`)
     } catch (error) {
       console.log('error signing in', error);
     }
